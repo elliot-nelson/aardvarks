@@ -7,7 +7,7 @@ DEFAULT='\033[0m'
 
 function comment {
   echo
-  echo $1
+  echo -e "${LIME}$1${DEFAULT}"
   echo ========================================
 }
 
@@ -31,7 +31,7 @@ if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
 then
 	echo "Setting up..."
 else
-	echo "Try the following:"
+	echo "Missing brew and/or mvim, try the following:"
 	echo
   echo -e "  /usr/bin/ruby -e \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
 	echo -e "  brew install macvim"
