@@ -1,10 +1,43 @@
 #!/bin/bash
 
+GREEN='\033[0;32m'
+LIME='\033[1;32m'
+MAGENTA='\033[1;35m'
+DEFAULT='\033[0m'
+
 function comment {
   echo
   echo $1
   echo ========================================
 }
+
+comment "Checking dependencies..."
+echo -e "${MAGENTA}Brew${DEFAULT} (0.9.5)"
+echo "  `brew -v`"
+
+echo -e "${MAGENTA}Ruby${DEFAULT} (2.x+)"
+echo "  `ruby -v`"
+
+echo -e "${MAGENTA}MacVim${DEFAULT} (7.x +ruby)"
+echo "  `mvim --version | head -n 1`"
+echo "  `mvim --version | grep ruby`"
+
+echo
+echo -n "Everything look OK? [y/n] "
+read -n 1 answer
+echo
+
+if [ "$answer" = "y" ] || [ "$answer" = "Y" ]
+then
+	echo "Setting up..."
+else
+	echo "Try the following:"
+	echo
+  echo -e "  /usr/bin/ruby -e \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+	echo -e "  brew install macvim"
+	echo
+	exit 1
+fi
 
 comment "Creating directories"
 mkdir -p ~/src
