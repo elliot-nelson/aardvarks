@@ -54,11 +54,14 @@ cp ~/aardvarks/.vimrc ~/
 
 comment "Installing Smyck"
 git clone https://github.com/hukl/Smyck-Color-Scheme/ ~/src/smyck || echo Skipping...
-cp ~/src/smyck/symck.vim ~/.vim/colors
+cp ~/src/smyck/smyck.vim ~/.vim/colors
 
 comment "Installing Pathogen"
 git clone https://github.com/tpope/vim-pathogen ~/src/pathogen || echo Skipping...
 cp ~/src/pathogen/autoload/pathogen.vim ~/.vim/autoload
+
+comment "Installing NERD Tree"
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 
 comment "Installing Command-T"
 git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t

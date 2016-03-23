@@ -10,6 +10,9 @@ set noswapfile
 " open a blank tab with <t>
 noremap t :tabnew<CR>
 
+" open nerdtree
+noremap T :NERDTree<CR>
+
 " toggle between tabs with <m> and <shift-m>
 noremap m :tabnext<CR>
 noremap M :tabprev<CR>
