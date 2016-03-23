@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function comment {
-  echo ========================================
+  echo
   echo $1
   echo ========================================
 }
@@ -10,16 +10,18 @@ comment "Creating directories"
 mkdir -p ~/src
 mkdir -p ~/.vim/autoload
 mkdir -p ~/.vim/bundle
+mkdir -p ~/.vim/colors
 
-comment "Copying .bashrc"
+comment "Copying bashrc"
 cp ~/aardvarks/.bashrc ~/
 cp ~/aardvarks/.bash_profile ~/
 
-comment "Copying .vimrc"
+comment "Copying vimrc"
 cp ~/aardvarks/.vimrc ~/
 
 comment "Installing Smyck"
 git clone https://github.com/hukl/Smyck-Color-Scheme/ ~/src/smyck || echo Skipping...
+cp ~/src/smyck/symck.vim ~/.vim/colors
 
 comment "Installing Pathogen"
 git clone https://github.com/tpope/vim-pathogen ~/src/pathogen || echo Skipping...
