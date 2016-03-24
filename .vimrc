@@ -10,8 +10,8 @@ set noswapfile
 " open a blank tab with <t>
 noremap t :tabnew<CR>
 
-" open nerdtree
-noremap T :NERDTree<CR>
+" open/close nerdtree
+noremap <leader>t :NERDTreeToggle<CR>
 
 " toggle between tabs with <m> and <shift-m>
 noremap m :tabnext<CR>
@@ -21,9 +21,10 @@ noremap M :tabprev<CR>
 noremap c :tabclose<CR>
 
 " open edit line (no-command-t support)
-" noremap e :e<SPACE>
-" open edit line (command-t compiled)
-noremap e :CommandT<CR>
+noremap e :e<SPACE>
+
+" open edit line (command-t support)
+noremap f :CommandT<CR>
 
 " switch to specific tab numbers with Command-number
 noremap <D-1> :tabn 1<CR>
