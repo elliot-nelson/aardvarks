@@ -45,25 +45,24 @@ mkdir -p ~/.vim/autoload
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/colors
 
-comment "Copying bashrc"
+comment "Copying dot files..."
 cp ~/aardvarks/.bashrc ~/
 cp ~/aardvarks/.bash_profile ~/
-
-comment "Copying vimrc"
 cp ~/aardvarks/.vimrc ~/
+cp ~/aardvarks/.gitconfig ~/
 
 comment "Installing Smyck"
-git clone https://github.com/hukl/Smyck-Color-Scheme/ ~/src/smyck || echo Skipping...
+git clone https://github.com/hukl/Smyck-Color-Scheme/ ~/src/smyck || echo Already exists.
 cp ~/src/smyck/smyck.vim ~/.vim/colors
 
 comment "Installing Pathogen"
-git clone https://github.com/tpope/vim-pathogen ~/src/pathogen || echo Skipping...
+git clone https://github.com/tpope/vim-pathogen ~/src/pathogen || echo Already exists.
 cp ~/src/pathogen/autoload/pathogen.vim ~/.vim/autoload
 
 comment "Installing NERD Tree"
-git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree || echo Already exists.
 
 comment "Installing Command-T"
-git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t
+git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t || echo Already exists.
 cd ~/.vim/bundle/command-t
 rake make
