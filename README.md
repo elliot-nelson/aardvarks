@@ -1,4 +1,4 @@
-## Aardvarks
+## aardvarks
 
 A collection of dotfiles and personal scripts.
 
