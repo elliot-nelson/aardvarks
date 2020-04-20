@@ -1,0 +1,84 @@
+# Extra utilities
+
+analyze() {
+    grunt analyzeJenkinsBuildOutput:$1
+}
+
+mac-image() {
+    local RESULT=`snmpget -c public $1 sysDescr.0`
+    local TS=`echo $RESULT | perl -pe 's/.*-(.*)$/\1/'`
+    echo "$RESULT (`date -r $TS 2>/dev/null`)"
+}
+
+hadronci() {
+    local PROFILE=$1
+    local CODE=$2
+    if [ "$PROFILE" = "" ]; then
+        PROFILE=hadronci
+    fi
+    if [ "$CODE" = "" ]; then
+        CODE=`node ~/dev/mfacode/bin/index.js get hadronci`
+    fi
+    ~/dev/perform-scripts/get-aws-keys enelson $CODE hadronci $PROFILE
+}
+
+hbogo() {
+    local PROFILE=$1
+    local CODE=$2
+    if [ "$PROFILE" = "" ]; then
+        PROFILE=hbogo
+    fi
+    if [ "$CODE" = "" ]; then
+        CODE=`node ~/dev/mfacode/bin/index.js get hadronci`
+    fi
+    ~/dev/perform-scripts/get-aws-keys enelson $CODE hbogo $PROFILE
+}
+
+spec() {
+    target_file=$PWD/$1
+    if [[ $target_file == "/spec/" ]]; then
+        spec_command=${target_file%/*}/test.sh
+        spec_file=${target_file##*/}
+        spec_file=${spec_file%-spec.*}
+    else
+        spec_command=${target_file%/*}/spec/test.sh
+        spec_file=${target_file##*/}
+        spec_file=${spec_file%.*}
+    fi
+    echo "# ${spec_command} ${spec_file}"
+    ${spec_command} ${spec_file}
+}
+
+cover() {
+    target_file=$PWD/$1
+    if [[ $target_file == "/spec/" ]]; then
+        spec_command=${target_file%/*}/test.sh
+        spec_file=${target_file##*/}
+        spec_file=${spec_file%-spec.*}
+    else
+        spec_command=${target_file%/*}/spec/test.sh
+        spec_file=${target_file##*/}
+        spec_file=${spec_file%.*}
+    fi
+    coverage_file=${spec_command%/*}/coverage/${target_file##*build_env/}.html
+    echo "# $spec_command --report --cover --no-enforce-coverage $spec_file"
+    $spec_command --report --cover --no-enforce-coverage $spec_file
+    echo "# open $coverage_file"
+    open $coverage_file
+}
+
+list-secrets1() {
+    aws secretsmanager list-secrets --max-results 100 | jq '.SecretList[] | [.Name, .Description]' -c
+}
+
+get-secret1() {
+    aws secretsmanager get-secret-value --secret-id $1
+}
+
+list-secrets2() {
+    aws ssm describe-parameters | jq '.Parameters[] | [.Name, .Description]' -c
+}
+
+get-secret2() {
+    aws ssm get-parameters --name $1 --with-decryption --query 'Parameters[*].{Value:Value}' --output text
+}

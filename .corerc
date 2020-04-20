@@ -1,0 +1,15 @@
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Colors
+export CLICOLOR=1
+export LSCOLORS=exaCCxDxBxegedabagaced
+
+# Path
+export PATH=node_modules/.bin:~/bin:$PATH
+
+# Git
+alias gs="git status -sb"
+alias gc="git commit"
+alias gx="git checkout"
